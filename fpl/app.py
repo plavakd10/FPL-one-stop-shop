@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 
+from api_id import managerid
+
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
@@ -11,7 +13,10 @@ def home():
 
 @app.route("/login/<int:id>")
 def login(id):
-    return f"Hello, {id}"
+    first_name = managerid(id)[0]
+    last_name = managerid(id)[1]
+
+    return render_template("manager.html",first_name=first_name,last_name=last_name)
 
 
 if __name__ == "__main__":
